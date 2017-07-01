@@ -1,0 +1,21 @@
+{
+  "name": "washer",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "WSQ <592786982@qq.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/wsq01/washerAdmin",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "js-md5": "md5#^0.4.2",
+    "bootstrapvalidator": "bootstrapValidator#^0.5.3"
+  }
+}

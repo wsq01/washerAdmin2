@@ -1,0 +1,92 @@
+<section>
+  <div class="animated fadeIn table-p">
+    <h3 class="text-center">地区列表</h3>
+    <nav class="navbar navbar-default navbar-margin">
+        <div class="container-fluid">
+            <button class="btn btn-primary navbar-btn" ng-click="add()" data-toggle="modal" data-target="#add">添加地区</button>
+        </div>
+    </nav>
+    <div class="table-responsive">
+      <table ng-table="dataTable" class="table table-condensed table-bordered table-striped">
+        <tr ng-repeat="item in $data">
+          <td class="text-center" title="'地区ID'" filter="{id:'number'}" sortable="'id'">{{item.id}}</td>
+          <td class="text-center" title="'地区名称'" filter="{name:'text'}" sortable="'name'">{{item.name}}</td>
+          <td class="text-center" title="'操作'">
+            <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#changeModal" ng-click="change(item)">修改</button>
+            <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#deleteModal" ng-click="delete(item)">删除</button>
+          </td>
+        </tr>
+        <tr ng-if="district.length==0">
+          <td class="text-center" colspan=3>
+            没有数据！
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="modal fade" id="add">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button class="close" data-dismiss="modal"><span>&times;</span></button>
+                  <h4 class="modal-title">信息</h4>
+              </div>
+              <div class="modal-body">
+                  <form class="form-horizontal">
+                      <div class="form-group">
+                          <label class="col-sm-3 control-label">地区名称:</label>
+                          <div class="col-sm-8">
+                              <input type="text" class="form-control"  required ng-model="addItem.name">
+                          </div>
+                      </div>
+                  </form>
+              </div>
+              <div class="modal-footer">
+                  <button class="btn btn-primary" ng-click="add_sure()" ng-disabled="!addItem.name">确定</button>
+                  <button class="btn btn-default" ng-click="add_cancel()">取消</button>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="modal fade" id="changeModal" data-backdrop="static">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button class="close" data-dismiss="modal"><span>&times;</span></button>
+                  <h4 class="modal-title">信息</h4>
+              </div>
+              <div class="modal-body">
+                  <form class="form-horizontal">
+                      <div class="form-group">
+                          <label class="col-sm-3 control-label">地区名称:</label>
+                          <div class="col-sm-8">
+                              <input type="text" class="form-control" ng-model="districtItem.name">
+                          </div>
+                      </div>
+                  </form>
+              </div>
+              <div class="modal-footer">
+                  <button class="btn btn-primary" ng-click="change_sure()">确定</button>
+                  <button class="btn btn-default" ng-click="change_cancel()">取消</button>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="modal fade" id="deleteModal" data-backdrop="static">
+      <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button class="close" id="close"><span>&times;</span></button>
+                  <h4 class="text-left">操作</h4>
+              </div>
+              <div class="modal-body text-center">
+                  <p>您确定要执行删除操作？</p>
+              </div>
+              <div class="modal-footer">
+                  <button class="btn btn-primary" ng-click="delete_sure()">确定</button>
+                  <button class="btn btn-default" ng-click="delete_cancel()">取消</button>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>

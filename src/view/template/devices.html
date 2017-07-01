@@ -1,0 +1,171 @@
+<section>
+  <div class="animated fadeIn table-p">
+    <h3 class="text-center">洗衣机控制器列表</h3>
+    <nav class="navbar navbar-default navbar-margin">
+        <div class="container-fluid">
+            <button class="btn btn-primary navbar-btn" ng-click="add()" data-toggle="modal" data-target="#add">添加控制器</button>
+        </div>
+    </nav>
+    <div class="table-responsive">
+      <table ng-table="dataTable" class="table table-condensed table-bordered table-striped">
+        <tr ng-repeat="item in $data">
+          <td class="text-center" title="'控制器ID'" filter="{id:'number'}" sortable="'id'">{{item.id}}</td>
+          <td class="text-center" title="'控制器名称'" filter="{name:'text'}" sortable="'name'">{{item.name}}</td>
+          <td class="text-center" title="'MAC地址'" filter="{mac:'number'}" sortable="'mac'">{{item.mac}}</td>
+          <td class="text-center" title="'控制器DID'" filter="{did:'number'}" sortable="'did'">{{item.did}}</td>
+          <td class="text-center" title="'管理员ID'" filter="{manager:'text'}" sortable="'manager'">{{item.manager}}</td>
+          <td class="text-center" title="'lat'" filter="{lat:'number'}" sortable="'lat'">{{item.lat}}</td>
+          <td class="text-center" title="'lon'" filter="{lon:'number'}" sortable="'lon'">{{item.lon}}</td>
+          <td class="text-center" title="'楼层ID'" filter="{floor:'number'}" sortable="'floor'">{{item.floor}}</td>
+          <td class="text-center" title="'楼层名称'" filter="{floor_name:'text'}" sortable="'floor_name'">{{item.floor_name}}</td>
+          <td class="text-center" title="'学校ID'" filter="{school:'number'}" sortable="'school'">{{item.school}}</td>
+          <td class="text-center" title="'学校名称'" filter="{school_name:'text'}" sortable="'school_name'">{{item.school_name}}</td>
+          <td class="text-center" style="width:11%" title="'操作'">
+            <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#changeModal" ng-click="change(item)">修改</button>
+            <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#deleteModal" ng-click="delete(item)">删除</button>
+          </td>
+        </tr>
+        <tr ng-if="device.length==0">
+          <td class="text-center" colspan=12>没有数据!</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="modal fade" id="add">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button class="close" data-dismiss="modal"><span>&times;</span></button>
+                  <h4 class="modal-title">信息</h4>
+              </div>
+              <div class="modal-body">
+                  <form class="form-horizontal">
+                      <div class="form-group">
+                          <label class="col-sm-3 control-label">控制器名称:</label>
+                          <div class="col-sm-8">
+                              <input type="text" class="form-control" ng-model="addItem.name">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-sm-3 control-label">MAC地址:</label>
+                          <div class="col-sm-8">
+                              <input type="text" class="form-control" ng-model="addItem.mac">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-sm-3 control-label">控制器DID:</label>
+                          <div class="col-sm-8">
+                              <input type="text" class="form-control" ng-model="addItem.did">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-sm-3 control-label">代理商ID:</label>
+                          <div class="col-sm-8">
+                              <input type="text" class="form-control" ng-model="addItem.vendor">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-sm-3 control-label">纬度:</label>
+                          <div class="col-sm-8">
+                              <input type="text" class="form-control" ng-model="addItem.lat">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-sm-3 control-label">经度:</label>
+                          <div class="col-sm-8">
+                              <input type="text" class="form-control" ng-model="addItem.lon">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-sm-3 control-label">楼层ID:</label>
+                          <div class="col-sm-8">
+                              <input type="text" class="form-control" ng-model="addItem.floor">
+                          </div>
+                      </div>
+                  </form>
+              </div>
+              <div class="modal-footer">
+                  <button class="btn btn-primary" ng-click="add_sure()">确定</button>
+                  <button class="btn btn-default" ng-click="add_cancel()">取消</button>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="modal fade" id="changeModal" data-backdrop="static">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button class="close" data-dismiss="modal"><span>&times;</span></button>
+                  <h4 class="modal-title">信息</h4>
+              </div>
+              <div class="modal-body">
+                  <form class="form-horizontal">
+                      <div class="form-group">
+                          <label class="col-sm-3 control-label">控制器名称:</label>
+                          <div class="col-sm-8">
+                              <input type="text" class="form-control" ng-model="deviceItem.name">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-sm-3 control-label">MAC地址:</label>
+                          <div class="col-sm-8">
+                              <input type="text" class="form-control" ng-model="deviceItem.mac">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-sm-3 control-label">控制器DID:</label>
+                          <div class="col-sm-8">
+                              <input type="text" class="form-control" ng-model="deviceItem.did">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-sm-3 control-label">代理商ID:</label>
+                          <div class="col-sm-8">
+                              <input type="text" class="form-control" ng-model="deviceItem.manager">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-sm-3 control-label">lat:</label>
+                          <div class="col-sm-8">
+                              <input type="text" class="form-control" ng-model="deviceItem.lat">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-sm-3 control-label">lon:</label>
+                          <div class="col-sm-8">
+                              <input type="text" class="form-control" ng-model="deviceItem.lon">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-sm-3 control-label">fid:</label>
+                          <div class="col-sm-8">
+                              <input type="text" class="form-control" ng-model="deviceItem.floor">
+                          </div>
+                      </div>
+                  </form>
+              </div>
+              <div class="modal-footer">
+                  <button class="btn btn-primary" ng-click="change_sure()">确定</button>
+                  <button class="btn btn-default" ng-click="change_cancel()">取消</button>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="modal fade" id="deleteModal" data-backdrop="static">
+      <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button class="close" id="close"><span>&times;</span></button>
+                  <h4 class="text-left">操作</h4>
+              </div>
+              <div class="modal-body text-center">
+                  <p>您确定要执行删除操作？</p>
+              </div>
+              <div class="modal-footer">
+                  <button class="btn btn-primary" ng-click="delete_sure()">确定</button>
+                  <button class="btn btn-default" ng-click="delete_cancel()">取消</button>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
