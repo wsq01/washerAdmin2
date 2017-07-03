@@ -3,11 +3,12 @@
     <h3 class="text-center">洗衣机列表</h3>
     <nav class="navbar navbar-default navbar-margin">
         <div class="container-fluid">
+            <button class="btn btn-primary navbar-btn" ng-click="showFilters()">筛选</button>
             <button class="btn btn-primary navbar-btn" ng-click="add()" data-toggle="modal" data-target="#add">添加洗衣机</button>
         </div>
     </nav>
     <div class="table-responsive">
-      <table ng-table="dataTable" class="table table-condensed table-bordered table-striped">
+      <table ng-table="dataTable" show-filter="isShowFilter" class="table table-condensed table-bordered table-striped">
         <tr ng-repeat="item in $data">
           <td class="text-center" title="'洗衣机ID'" filter="{id:'number'}" sortable="'id'">{{item.id}}</td>
           <td class="text-center" title="'洗衣机二维码'" filter="{num:'text'}" sortable="'num'">{{item.num}}</td>
@@ -83,7 +84,7 @@
               </div>
               <div class="modal-footer">
                   <button class="btn btn-primary" ng-click="add_sure()">确定</button>
-                  <button class="btn btn-default" ng-click="add_cancel()">取消</button>
+                  <button class="btn btn-default" data-dismiss="modal">取消</button>
               </div>
           </div>
       </div>
@@ -170,7 +171,7 @@
       <div class="modal-dialog modal-sm">
           <div class="modal-content">
               <div class="modal-header">
-                  <button class="close" id="close"><span>&times;</span></button>
+                  <button class="close" data-dismiss="modal"><span>&times;</span></button>
                   <h4 class="text-left">操作</h4>
               </div>
               <div class="modal-body text-center">
@@ -178,7 +179,7 @@
               </div>
               <div class="modal-footer">
                   <button class="btn btn-primary" ng-click="delete_sure()">确定</button>
-                  <button class="btn btn-default" ng-click="delete_cancel()">取消</button>
+                  <button class="btn btn-default" data-dismiss="modal">取消</button>
               </div>
           </div>
       </div>

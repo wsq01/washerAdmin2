@@ -2,7 +2,7 @@ angular.module('app').controller('devicesCtrl', ['$http', '$scope', 'locals', 'N
   var userInfo = locals.getObject('userInfo'),
     sid = userInfo.sid,
     uid = window.localStorage.getItem('uid');
-    // 获取
+  // 获取
   $scope.getData = function() {
     $http({
       method: "post",
@@ -20,6 +20,7 @@ angular.module('app').controller('devicesCtrl', ['$http', '$scope', 'locals', 'N
     }).success(function(data) {
       console.log(data);
       $scope.device = data.devices;
+      $scope.isShowFilter=false;
       $scope.dataTable = new NgTableParams({
         page: 1,
         count: 15
@@ -30,6 +31,13 @@ angular.module('app').controller('devicesCtrl', ['$http', '$scope', 'locals', 'N
     });
   }
   $scope.getData();
+    $scope.showFilters=function () {
+        if($scope.isShowFilter==false){
+            $scope.isShowFilter=true;
+        }else{
+            $scope.isShowFilter=false;
+        }
+    }
   // 添加****
   $scope.add = function() {
     $scope.add_sure = function() {
@@ -56,12 +64,9 @@ angular.module('app').controller('devicesCtrl', ['$http', '$scope', 'locals', 'N
       }).success(function(data) {
         console.log(data);
         $scope.getData();
+        $('#add').modal('hide');
       });
-      $('#add').modal('hide');
     };
-    $scope.add_cancel = function() {
-      $('#add').modal('hide')
-    }
   };
   // 修改****
   $scope.change = function(item) {
@@ -132,14 +137,8 @@ angular.module('app').controller('devicesCtrl', ['$http', '$scope', 'locals', 'N
       }).success(function(data) {
         console.log(data);
         $scope.getData();
+        $('#deleteModal').modal('hide');
       });
-      $('#deleteModal').modal('hide');
     };
-    $scope.delete_cancel = function() {
-      $('#deleteModal').modal('hide')
-    };
-    $('#close').click(function() {
-      $('#deleteModal').modal('hide')
-    })
   };
 }]);

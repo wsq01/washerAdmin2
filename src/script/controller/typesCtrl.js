@@ -16,6 +16,7 @@ angular.module('app').controller('typesCtrl', ['$http', '$scope','locals','NgTab
         }).success(function(data) {
             console.log(data);
             $scope.type = data.types;
+            $scope.isShowFilter=false;
             $scope.dataTable = new NgTableParams({
               page: 1,
               count: 15
@@ -24,8 +25,15 @@ angular.module('app').controller('typesCtrl', ['$http', '$scope','locals','NgTab
               dataset: $scope.type
             })
         });
-      }
+      };
     $scope.getData();
+    $scope.showFilters=function () {
+        if($scope.isShowFilter==false){
+            $scope.isShowFilter=true;
+        }else{
+            $scope.isShowFilter=false;
+        }
+    };
     // 添加****
     $scope.add = function() {
         $scope.add_sure = function() {
@@ -44,12 +52,9 @@ angular.module('app').controller('typesCtrl', ['$http', '$scope','locals','NgTab
                 transformRequest: function(data) {return $.param(data);}
             }).success(function(data) {
                 $scope.getData();
+                $('#add').modal('hide');
             });
-            $('#add').modal('hide');
         };
-        $scope.add_cancel=function () {
-            $('#add').modal('hide')
-        }
     };
     // 修改*****
     $scope.change = function(item) {
@@ -103,14 +108,8 @@ angular.module('app').controller('typesCtrl', ['$http', '$scope','locals','NgTab
             }).success(function(data) {
                 console.log(data);
                 $scoe.getData();
+                $('#deleteModal').modal('hide');
             });
-            $('#deleteModal').modal('hide');
         };
-        $scope.delete_cancel=function () {
-            $('#deleteModal').modal('hide')
-        };
-        $('#close').click(function(){
-            $('#deleteModal').modal('hide')
-        })
     };
 }]);

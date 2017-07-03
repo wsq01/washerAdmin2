@@ -3,17 +3,18 @@
     <h3 class="text-center">订单列表</h3>
     <nav class="navbar navbar-default navbar-margin">
         <div class="container-fluid">
+            <button class="btn btn-primary navbar-btn" ng-click="showFilters()">筛选</button>
             <button class="btn btn-primary navbar-btn" ng-click="add()" data-toggle="modal" data-target="#add">添加订单</button>
             <button class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#total">汇总</button>
         </div>
     </nav>
     <div class="table-responsive">
-      <table ng-table="dataTable" class="table table-condensed table-bordered table-striped">
+      <table ng-table="dataTable" show-filter="isShowFilter" class="table table-condensed table-bordered table-striped">
         <tr ng-repeat="item in $data">
           <td class="text-center" title="'订单ID'" filter="{id:'number'}" sortable="'id'">{{item.id}}</td>
           <td class="text-center" title="'客户ID'" filter="{userid:'number'}" sortable="'userid'">{{item.userid}}</td>
           <td class="text-center" title="'客户姓名'" filter="{customer_name:'text'}" sortable="'customer_name'">{{item.customer_name}}</td>
-          <td class="text-center" title="'开始洗衣时间'" filter="{starttime:'text'}" sortable="'starttime'">{{item.starttime}}</td>
+          <td class="text-center" style="width:12%" title="'开始洗衣时间'" filter="{starttime:'text'}" sortable="'starttime'">{{item.starttime}}</td>
           <td class="text-center" title="'洗衣总价'" filter="{amount:'text'}" sortable="'amount'">{{item.amount}}</td>
           <td class="text-center" title="'洗衣时长'" filter="{duration:'text'}" sortable="'duration'">{{item.duration}}</td>
           <td class="text-center" title="'用户手机号'" filter="{mobile:'number'}" sortable="'mobile'">{{item.mobile}}</td>
@@ -21,7 +22,7 @@
           <td class="text-center" title="'模式'" filter="{mode:'number'}" sortable="'mode'">{{item.mode}}</td>
           <td class="text-center" title="'消费地点'" filter="{addr:'text'}" sortable="'addr'">{{item.addr}}</td>
           <td class="text-center" title="'订单状态'" filter="{status:'number'}" sortable="'status'">{{item.status|orderStatus}}</td>
-          <td class="text-center" title="'操作'" style="width:15%">
+          <td class="text-center" title="'操作'" style="width:14%">
               <button class="btn btn-primary btn-xs" ng-click="confirm_pay(item)">确认付款</button>
               <button class="btn btn-primary btn-xs" ng-click="finish_order(item)">确认完成</button>
           </td>
@@ -74,7 +75,7 @@
               </div>
               <div class="modal-footer">
                   <button class="btn btn-primary" ng-click="total_sure()" data-toggle="modal" data-target="#highChart">确定</button>
-                  <button class="btn btn-default" ng-click="total_cancel()">取消</button>
+                  <button class="btn btn-default" data-dismiss="modal">取消</button>
               </div>
           </div>
       </div>
@@ -122,7 +123,7 @@
               </div>
               <div class="modal-footer">
                   <button class="btn btn-primary" ng-click="add_sure()">确定</button>
-                  <button class="btn btn-default" ng-click="add_cancel()">取消</button>
+                  <button class="btn btn-default" data-dismiss="modal">取消</button>
               </div>
           </div>
       </div>

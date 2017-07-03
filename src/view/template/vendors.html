@@ -3,11 +3,12 @@
     <h3 class="text-center">代理商列表</h3>
     <nav class="navbar navbar-default navbar-margin">
         <div class="container-fluid">
+            <button class="btn btn-primary navbar-btn" ng-click="showFilters()">筛选</button>
             <button class="btn btn-primary navbar-btn" ng-click="addVendor()" data-toggle="modal" data-target="#addVendor">添加代理商</button>
         </div>
     </nav>
     <div class="table-responsive">
-      <table ng-table="dataTable" class="table table-condensed table-bordered table-striped">
+      <table ng-table="dataTable" show-filter="isShowFilter" class="table table-condensed table-bordered table-striped">
         <tr ng-repeat="item in $data">
           <td class="text-center" title="'ID'" filter="{id:'number'}" sortable="'id'">{{item.id}}</td>
           <td class="text-center" title="'名称'" filter="{company:'text'}" sortable="'company'">{{item.company}}</td>
@@ -39,7 +40,7 @@
               </div>
               <div class="modal-footer">
                   <button class="btn btn-primary" ng-click="add_sure()" ng-disabled="!addItem.company">确定</button>
-                  <button class="btn btn-default" ng-click="add_cancel()">取消</button>
+                  <button class="btn btn-default" data-dismiss="modal">取消</button>
               </div>
           </div>
       </div>

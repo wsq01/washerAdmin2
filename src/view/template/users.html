@@ -4,10 +4,11 @@
     <h3 class="text-center">用户列表</h3>
     <nav class="navbar navbar-default navbar-margin">
         <div class="container-fluid">
+            <button class="btn btn-primary navbar-btn" ng-click="showFilters()">筛选</button>
         </div>
     </nav>
     <div class="table-responsive">
-      <table ng-table="dataTable" class="table table-condensed table-bordered table-striped">
+      <table ng-table="dataTable" show-filter="isShowFilter" class="table table-condensed table-bordered table-striped">
         <tr ng-repeat="item in $data">
           <td class="text-center" title="'用户ID'" filter="{id:'number'}" sortable="'id'">{{item.id}}</td>
           <td class="text-center" title="'用户姓名'" filter="{username:'text'}" sortable="'username'">{{item.username}}</td>
